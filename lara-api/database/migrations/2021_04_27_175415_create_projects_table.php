@@ -19,6 +19,7 @@ class CreateProjectsTable extends Migration
             $table->string('introduction', 500)->nullable();
             $table->string('location', 255)->nullable();
             $table->integer('cost')->nullable();
+            $table->integer('user_id')->nullable();
             $table->timestamps();
         });
     }
