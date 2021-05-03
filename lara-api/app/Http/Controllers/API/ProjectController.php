@@ -17,9 +17,13 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::all();
+        $projects = Project::select('name','introduction','location','cost','user_id','created_at')
+                            // ->where('user_id',auth()->user()->id)
+                            ->orderBy('id','desc')
+                            ->get();
+
         return response([ 'projects' => ProjectResource::collection($projects), 
-                            'message' => 'Retrieved successfully'], 200);
+                            'message' => 'Retrieved index successfully'], 200);
     }
 
     /**
@@ -62,7 +66,7 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        return response(['project' => new ProjectResource($project), 'message' => 'Retrieved successfully'], 200);
+        return response(['project' => new ProjectResource($project), 'message' => 'Retrieved show successfully'], 200);
     }
 
     /**
